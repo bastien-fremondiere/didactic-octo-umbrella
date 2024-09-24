@@ -9,7 +9,7 @@ type DateObject = {
 };
 
 const DATES = new Map<string, DateObject>([
-    ['FANTA', {
+    ['FANTA', { // 15h11 - 10h12
         start: '2024-08-14T10:00:00.000+02:00',
         end: '2024-09-30T23:59:59.999+02:00',
         nb: 230,
@@ -56,6 +56,13 @@ const DATES = new Map<string, DateObject>([
 function getDateObject(name: string) {
     return DATES.get(name);
 }
+
+function getInterval(dateObject: DateObject): number {
+    const epochStart = Date.parse(dateObject.start);
+    const epochEnd = Date.parse(dateObject.end);
+    return (epochEnd - epochStart) / dateObject.nb;
+}
+
 function getDates(dateObject: DateObject): number[] {
     const epochStart = Date.parse(dateObject.start);
     const epochEnd = Date.parse(dateObject.end);
@@ -130,4 +137,4 @@ function getCurrentPrizes(dateObject: DateObject) {
     return prizesReal;
 }
 
-export { getDateObject, getDates, getNextDate, getNextDates, getCurrentPrizes };
+export { getInterval, getDateObject, getDates, getNextDate, getNextDates, getCurrentPrizes };

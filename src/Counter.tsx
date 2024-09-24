@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { getCurrentPrizes, getDateObject, getNextDate, getNextDates } from './data';
+import { getCurrentPrizes, getDateObject, getInterval, getNextDate, getNextDates } from './data';
 
 function Counter({ name }: { name: string }) {
     function getDurationAsString(seconds: number) {
@@ -23,6 +23,8 @@ function Counter({ name }: { name: string }) {
     return (
         <div>
             <div>Play in {getDurationAsString(timeRemaining)}</div>
+            <div>Interval {dateObject && getDurationAsString(getInterval(dateObject) / 1000)}</div>
+
             <h1>Counter</h1>
             <p>
                 {nearestDate ? `Next date: ${new Date(nearestDate).toLocaleString('fr-FR', { timeZone: 'CET' })}` : 'No date found'}
