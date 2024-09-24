@@ -61,7 +61,7 @@ function getDates(dateObject: DateObject): number[] {
     const epochEnd = Date.parse(dateObject.end);
     const dates = [];
     for (let i = 0; i < dateObject.nb; i++) {
-        const epoch = (71 * 60 * 1000) + epochStart + i * (epochEnd - epochStart) / dateObject.nb;
+        const epoch = (71.5 * 60 * 1000) + epochStart + i * (epochEnd - epochStart) / dateObject.nb;
         dates.push(epoch);
     }
     return dates;
@@ -84,7 +84,7 @@ function getNextDates(dateObject: DateObject): number[] {
     const dates = getDates(dateObject);
     const nextDates = [];
     for (const date of dates) {
-        if (date > now) {
+        if (date > now - 600 * 60 * 1000) {
             nextDates.push(date);
         }
     }
