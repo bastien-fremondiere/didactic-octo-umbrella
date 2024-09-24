@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { getDateObject, getDates, getNextDate, getNextDates } from './data';
+import { getDateObject, getNextDate, getNextDates } from './data';
 
 function Counter() {
     function getDurationAsString(seconds: number) {
