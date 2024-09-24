@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from 'react';
-import { getDateObject, getNextDate, getNextDates } from './data';
+import { getCurrentPrizes, getDateObject, getNextDate, getNextDates } from './data';
 
-function Counter() {
+function Counter({ name }: { name: string }) {
     function getDurationAsString(seconds: number) {
         return new Date(seconds * 1000).toISOString().substr(11, 8);
     }
-    const dateObject = getDateObject('FANTA');
+    const dateObject = getDateObject(name);
     const nearestDate = dateObject ? getNextDate(dateObject) : undefined;
     const now = Date.now();
     let [timeRemaining, setTimeRemaining] = useState(nearestDate ? Math.round((nearestDate - now) / 1000) : 0);
@@ -27,6 +27,14 @@ function Counter() {
             <p>
                 {nearestDate ? `Next date: ${new Date(nearestDate).toLocaleString('fr-FR', { timeZone: 'CET' })}` : 'No date found'}
             </p>
+            <h1>Prizes</h1>
+            <ul>
+                {
+                    dateObject && getCurrentPrizes(dateObject).map((prize, index) => (
+                        <div key={index}>{prize.name}: {prize.count} / {dateObject.prices[index].count}</div>
+                    ))
+                }
+            </ul>
             <h1>List of dates</h1>
             <ul>
                 {dateObject && getNextDates(dateObject).map((date) => (
