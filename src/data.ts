@@ -9,45 +9,60 @@ type DateObject = {
 };
 
 const DATES = new Map<string, DateObject>([
-    ['FANTA', { // 15h11 - 10h12
-        start: '2024-08-14T10:00:00.000+02:00',
-        end: '2024-09-30T23:59:59.999+02:00',
-        nb: 230,
+    // ['FANTA', {
+    //     start: '2024-08-14T10:00:00.000+02:00',
+    //     end: '2024-09-30T23:59:59.999+02:00',
+    //     nb: 230,
+    //     prices: [
+    //         {
+    //             name: 'Sejour Inoubliable',
+    //             count: 5
+    //         },
+    //         {
+    //             name: 'Sejour magique',
+    //             count: 100
+    //         },
+    //         {
+    //             name: 'Billets',
+    //             count: 125
+    //         }
+    //     ]
+    // }],
+    // ['MARVEL', {
+    //     start: '2024-09-02T10:00:00.000+02:00',
+    //     end: '2024-10-31T23:59:59.999+02:00',
+    //     nb: 120,
+    //     prices: [
+    //         {
+    //             name: 'Experience',
+    //             count: 5
+    //         },
+    //         {
+    //             name: 'Week end',
+    //             count: 40
+    //         },
+    //         {
+    //             name: 'Invitation',
+    //             count: 30
+    //         },
+    //         {
+    //             name: 'Veste',
+    //             count: 45
+    //         }
+    //     ]
+    // }],
+    ['TERRIFIANT', {
+        start: '2024-09-02T10:00:00.000+02:00',
+        end: '2024-11-15T23:59:59.999+02:00',
+        nb: 600,
         prices: [
             {
-                name: 'Sejour Inoubliable',
-                count: 5
-            },
-            {
-                name: 'Sejour magique',
+                name: 'KIT',
                 count: 100
             },
             {
-                name: 'Billets',
-                count: 125
-            }
-        ]
-    }],
-    ['MARVEL', {
-        start: '2024-09-02T10:00:00.000+02:00',
-        end: '2024-10-31T23:59:59.999+02:00',
-        nb: 120,
-        prices: [
-            {
-                name: 'Experience',
-                count: 5
-            },
-            {
-                name: 'Week end',
-                count: 40
-            },
-            {
-                name: 'Invitation',
-                count: 30
-            },
-            {
-                name: 'Veste',
-                count: 45
+                name: 'CINE',
+                count: 500
             }
         ]
     }],
@@ -63,12 +78,20 @@ function getInterval(dateObject: DateObject): number {
     return (epochEnd - epochStart) / dateObject.nb;
 }
 
+function getAlpha(dateObject: DateObject, index: number): number {
+    return index / dateObject.nb;
+}
+
+function getMagicNumber(dateObject: DateObject, index: number): number {
+    return 0.25 * (1. - getAlpha(dateObject, index)) + 0.2;
+}
+
 function getDates(dateObject: DateObject): number[] {
     const epochStart = Date.parse(dateObject.start);
     const epochEnd = Date.parse(dateObject.end);
     const dates = [];
     for (let i = 0; i < dateObject.nb; i++) {
-        const epoch = (71.5 * 60 * 1000) + epochStart + i * (epochEnd - epochStart) / dateObject.nb;
+        const epoch = getInterval(dateObject) * getMagicNumber(dateObject, i) + epochStart + i * (epochEnd - epochStart) / dateObject.nb;
         dates.push(epoch);
     }
     return dates;
