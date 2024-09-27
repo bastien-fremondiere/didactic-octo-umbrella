@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import { getCurrentPrizes, getDateObject, getInterval, getNextDate, getNextDates } from './data';
+// import { getCurrentPrizes, getDateObject, getInterval, getNextDate, getNextDates } from './data';
+import { getDateObject, getNextDate, getNextDates } from './data';
 
 function Counter({ name }: { name: string }) {
     function getDurationAsString(seconds: number) {
