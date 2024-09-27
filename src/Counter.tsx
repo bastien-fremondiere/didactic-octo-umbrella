@@ -23,20 +23,20 @@ function Counter({ name }: { name: string }) {
     return (
         <div>
             <div>Play in {getDurationAsString(timeRemaining)}</div>
-            <div>Interval {dateObject && getDurationAsString(getInterval(dateObject) / 1000)}</div>
+            {/* <div>Interval {dateObject && getDurationAsString(getInterval(dateObject) / 1000)}</div> */}
 
-            <h1>Counter</h1>
+            {/* <h1>Counter</h1>
             <p>
                 {nearestDate ? `Next date: ${new Date(nearestDate).toLocaleString('fr-FR', { timeZone: 'CET' })}` : 'No date found'}
-            </p>
-            <h1>Prizes</h1>
+            </p> */}
+            {/* <h1>Prizes</h1>
             <ul>
                 {
                     dateObject && getCurrentPrizes(dateObject).map((prize, index) => (
                         <div key={index}>{prize.name}: {prize.count} / {dateObject.prices[index].count}</div>
                     ))
                 }
-            </ul>
+            </ul> */}
             <h1>List of dates</h1>
             <ul>
                 {dateObject && getNextDates(dateObject).map((date) => (
@@ -45,7 +45,7 @@ function Counter({ name }: { name: string }) {
                     }}>{new Date(date).toLocaleString('fr-FR', { timeZone: 'CET' })}</div>
                 ))}
             </ul>
-            <table className="table">
+            {/* <table className="table">
                 <thead>
                     <tr>
                         <th>Start</th>
@@ -60,7 +60,7 @@ function Counter({ name }: { name: string }) {
                         <td>{dateObject?.nb}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
         </div>
     );

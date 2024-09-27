@@ -114,7 +114,7 @@ function getNextDates(dateObject: DateObject): number[] {
     const dates = getDates(dateObject);
     const nextDates = [];
     for (const date of dates) {
-        if (date > now - 600 * 60 * 1000) {
+        if (date > now - 300 * 60 * 1000) {
             nextDates.push(date);
         }
     }
